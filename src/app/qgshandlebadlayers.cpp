@@ -43,10 +43,10 @@ void QgsHandleBadLayersHandler::handleBadLayers( const QList<QDomNode> &layers )
   QgsHandleBadLayers *dialog = new QgsHandleBadLayers( layers );
 
   dialog->buttonBox->button( QDialogButtonBox::Ignore )->setToolTip( tr( "Import all unavailable layers unmodified (you can fix them later)." ) );
-  dialog->buttonBox->button( QDialogButtonBox::Ignore )->setText( tr( "Keep unavailable layers" ) );
+  dialog->buttonBox->button( QDialogButtonBox::Ignore )->setText( tr( "Keep Unavailable Layers" ) );
   dialog->buttonBox->button( QDialogButtonBox::Discard )->setToolTip( tr( "Remove all unavailable layers from the project" ) );
-  dialog->buttonBox->button( QDialogButtonBox::Discard )->setText( tr( "Remove unavailable layers" ) );
-  dialog->buttonBox->button( QDialogButtonBox::Discard )->setIcon( QgsApplication::getThemeIcon( "/mActionDeleteSelected.svg" ) );
+  dialog->buttonBox->button( QDialogButtonBox::Discard )->setText( tr( "Remove Unavailable Layers" ) );
+  dialog->buttonBox->button( QDialogButtonBox::Discard )->setIcon( QgsApplication::getThemeIcon( QStringLiteral( "/mActionDeleteSelected.svg" ) ) );
 
   if ( dialog->layerCount() < layers.size() )
     QgisApp::instance()->messageBar()->pushMessage(
@@ -57,7 +57,12 @@ void QgsHandleBadLayersHandler::handleBadLayers( const QList<QDomNode> &layers )
       Qgis::Warning, QgisApp::instance()->messageTimeout() );
 
   if ( dialog->layerCount() > 0 )
-    dialog->exec();
+  {
+    if ( dialog->exec() == dialog->Accepted )
+    {
+      emit layersChanged();
+    }
+  }
 
   delete dialog;
   QApplication::restoreOverrideCursor();
@@ -395,7 +400,7 @@ void QgsHandleBadLayers::accept()
   if ( mLayerList->rowCount() > 0  &&
        QMessageBox::warning( this,
                              tr( "Unhandled layer will be lost." ),
-                             tr( "There are still %n unhandled layer(s), that will be lost if you closed now.",
+                             tr( "There are still %n unhandled layer(s). If they are not fixed, they will be disabled/deactivated until the project is opened again.",
                                  "unhandled layers",
                                  mLayerList->rowCount() ),
                              QMessageBox::Ok | QMessageBox::Cancel,

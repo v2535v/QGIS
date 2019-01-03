@@ -36,6 +36,7 @@
 #include "qgsalgorithmexplodehstore.h"
 #include "qgsalgorithmextendlines.h"
 #include "qgsalgorithmextenttolayer.h"
+#include "qgsalgorithmextractbinary.h"
 #include "qgsalgorithmextractbyattribute.h"
 #include "qgsalgorithmextractbyexpression.h"
 #include "qgsalgorithmextractbyextent.h"
@@ -45,6 +46,7 @@
 #include "qgsalgorithmfilter.h"
 #include "qgsalgorithmfiltervertices.h"
 #include "qgsalgorithmfixgeometries.h"
+#include "qgsalgorithmforcerhr.h"
 #include "qgsalgorithmjoinbyattribute.h"
 #include "qgsalgorithmjoinwithlines.h"
 #include "qgsalgorithmimportphotos.h"
@@ -85,6 +87,7 @@
 #include "qgsalgorithmsimplify.h"
 #include "qgsalgorithmsmooth.h"
 #include "qgsalgorithmsnaptogrid.h"
+#include "qgsalgorithmsplitlinesbylength.h"
 #include "qgsalgorithmsplitwithlines.h"
 #include "qgsalgorithmstringconcatenation.h"
 #include "qgsalgorithmsubdivide.h"
@@ -162,6 +165,7 @@ void QgsNativeAlgorithms::loadAlgorithms()
   addAlgorithm( new QgsExplodeHstoreAlgorithm() );
   addAlgorithm( new QgsExtendLinesAlgorithm() );
   addAlgorithm( new QgsExtentToLayerAlgorithm() );
+  addAlgorithm( new QgsExtractBinaryFieldAlgorithm() );
   addAlgorithm( new QgsExtractByAttributeAlgorithm() );
   addAlgorithm( new QgsExtractByExpressionAlgorithm() );
   addAlgorithm( new QgsExtractByExtentAlgorithm() );
@@ -172,6 +176,7 @@ void QgsNativeAlgorithms::loadAlgorithms()
   addAlgorithm( new QgsFilterVerticesByM() );
   addAlgorithm( new QgsFilterVerticesByZ() );
   addAlgorithm( new QgsFixGeometriesAlgorithm() );
+  addAlgorithm( new QgsForceRHRAlgorithm() );
   addAlgorithm( new QgsImportPhotosAlgorithm() );
   addAlgorithm( new QgsInterpolatePointAlgorithm() );
   addAlgorithm( new QgsIntersectionAlgorithm() );
@@ -217,6 +222,7 @@ void QgsNativeAlgorithms::loadAlgorithms()
   addAlgorithm( new QgsSimplifyAlgorithm() );
   addAlgorithm( new QgsSmoothAlgorithm() );
   addAlgorithm( new QgsSnapToGridAlgorithm() );
+  addAlgorithm( new QgsSplitLinesByLengthAlgorithm() );
   addAlgorithm( new QgsSplitWithLinesAlgorithm() );
   addAlgorithm( new QgsStringConcatenationAlgorithm() );
   addAlgorithm( new QgsSubdivideAlgorithm() );
